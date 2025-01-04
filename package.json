@@ -29,6 +29,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
+    "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "formik": "^2.4.6",
     "motion": "^11.15.0",

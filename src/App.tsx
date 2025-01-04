@@ -18,12 +18,18 @@ import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
+import { RootState, AppDispatch } from "../../app/store";
+import { UseSelector } from "react-redux";
 
 // import Dashboard from "./component/Dashboard";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  // const dispatch = useDispatch<AppDispatch>();
+  // const { transactions, userAccounts } = useSelector(
+  //   (state: RootState) => state.transactions
+  // );
 
   return (
     <ColorModeContext.Provider value={colorMode}>
