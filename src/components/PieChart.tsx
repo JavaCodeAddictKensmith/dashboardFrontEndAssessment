@@ -3,9 +3,13 @@ import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
 import { mockPieData as data } from "../data/mockData";
 
-const PieChart = () => {
+// Define types for the props (if any in the future)
+interface PieChartProps {}
+
+const PieChart: React.FC<PieChartProps> = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <ResponsivePie
       data={data}

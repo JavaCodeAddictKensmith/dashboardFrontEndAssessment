@@ -37,7 +37,7 @@ const Team: React.FC = () => {
   const { loanHistory, loanHisDetails } = useSelector(
     (state: RootState) => state.transactions
   );
-  const formatAmount = (amount) => {
+  const formatAmount = (amount: any) => {
     if (!amount) return "0.00";
     const parsedAmount = parseFloat(amount);
     if (isNaN(parsedAmount)) return "0.00";
@@ -103,11 +103,19 @@ const Team: React.FC = () => {
       >
         {/* Active Loan Details Section */}
         <Box
-          flex={1}
-          backgroundColor={colors.primary[400]}
-          borderRadius="8px"
-          boxShadow={3}
-          p={2}
+          // flex={1}
+          // backgroundColor={colors.primary[400]}
+          // borderRadius="8px"
+          // boxShadow={3}
+          // p={2}
+          sx={{
+            flex: 1,
+            backgroundColor: colors.primary[400],
+
+            borderRadius: "8px",
+            boxShadow: 3,
+            p: 2,
+          }}
         >
           <Typography
             color={colors.grey[100]}
@@ -218,7 +226,6 @@ const Team: React.FC = () => {
                     error={!!touched.email && !!errors.email}
                     helperText={touched.email && errors.email}
                     sx={{ gridColumn: "span 4" }}
-                    mt="20px"
                   />
                   <TextField
                     fullWidth
@@ -260,12 +267,21 @@ const Team: React.FC = () => {
         {/* Loan History Section */}
         <Box
           flex={1}
-          backgroundColor={colors.primary[400]}
-          overflow="auto"
-          borderRadius="8px"
-          boxShadow={3}
-          p={2}
-          mt={6}
+          // backgroundColor={colors.primary[400]}
+          // overflow="auto"
+          // borderRadius="8px"
+          // boxShadow={3}
+          // p={2}
+          // mt={6}
+          sx={{
+            flex: 1,
+            backgroundColor: colors.primary[400],
+            overflow: "auto",
+            borderRadius: "8px",
+            boxShadow: 3,
+            p: 2,
+            mt: 6,
+          }}
         >
           <Typography
             color={colors.grey[100]}

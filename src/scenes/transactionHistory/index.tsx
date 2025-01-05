@@ -19,7 +19,7 @@ const Contacts = () => {
   const { transactions } = useSelector(
     (state: RootState) => state.transactions
   );
-  const formatAmount = (amount) => {
+  const formatAmount = (amount: any) => {
     if (!amount) return "0.00";
     const parsedAmount = parseFloat(amount);
     if (isNaN(parsedAmount)) return "0.00";

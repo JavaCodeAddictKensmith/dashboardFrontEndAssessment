@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
@@ -15,9 +14,25 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { AttachMoney, Receipt } from "@mui/icons-material";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+// Define the Item component with props typed
+interface ItemProps {
+  title: string;
+  to: string;
+  icon: JSX.Element;
+  selected: string;
+  setSelected: (title: string) => void;
+}
+
+const Item: React.FC<ItemProps> = ({
+  title,
+  to,
+  icon,
+  selected,
+  setSelected,
+}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -33,7 +48,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar = ({ name, role }) => {
+// // Define the Sidebar component with props typed
+// interface SidebarProps {
+//   name: string;
+//   role: string;
+// }
+
+const Sidebar: React.FC = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -104,12 +125,11 @@ const Sidebar = ({ name, role }) => {
                   color={colors.grey[100]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
-                >
-                  {name}
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  {role}
-                </Typography>
+                ></Typography>
+                <Typography
+                  variant="h5"
+                  color={colors.greenAccent[500]}
+                ></Typography>
               </Box>
             </Box>
           )}
@@ -123,13 +143,6 @@ const Sidebar = ({ name, role }) => {
               setSelected={setSelected}
             />
 
-            {/* <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography> */}
             <Item
               title="Manage Loan"
               to="/team"
@@ -144,13 +157,6 @@ const Sidebar = ({ name, role }) => {
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
 
             <Typography
               variant="h6"
@@ -159,13 +165,6 @@ const Sidebar = ({ name, role }) => {
             >
               Pages
             </Typography>
-            {/* <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
             <Item
               title="Calendar"
               to="/calendar"

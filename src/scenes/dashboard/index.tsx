@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { transactions, userAccounts, loanHistory, loanHisDetails } =
     useSelector((state: RootState) => state.transactions);
-  const formatAmount = (amount) => {
+  const formatAmount = (amount:any) => {
     if (!amount) return "0.00";
     const parsedAmount = parseFloat(amount);
     if (isNaN(parsedAmount)) return "0.00";
@@ -183,12 +183,12 @@ const Dashboard: React.FC = () => {
           {/* ROW 1 */}
 
           <Transcale
-            // gridColumn="span 1"
-            // backgroundColor=
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            className={` min-w-[400px] md:min-h-[400px]  ${colors.primary[400]}`}
+          // gridColumn="span 1"
+          // backgroundColor=
+          // display="flex"
+          // alignItems="center"
+          // justifyContent="center"
+          // className={` min-w-[400px] md:min-h-[400px]  ${colors.primary[400]}`}
           >
             <Transcale className={" w-full md:min-h-[400px]  bg-red-800 "}>
               <h2> {userAccounts?.data[0]?.name}</h2>
@@ -198,6 +198,7 @@ const Dashboard: React.FC = () => {
               subtitle="Account Balance"
               progress="0.80"
               increase="+43%"
+              icon
               // icon={
               //   <TrafficIcon
               //     sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -208,9 +209,12 @@ const Dashboard: React.FC = () => {
 
           {/* ROW 2 */}
           <Box
-            gridColumn="span 8"
-            gridRow="span 2"
-            backgroundColor={colors.primary[400]}
+            sx={{
+              gridColumn: "span 8",
+              gridRow: "span 2",
+              backgroundColor: colors.primary[400],
+              // Added for consistent styling
+            }}
           >
             <Box
               mt="25px"
@@ -248,18 +252,22 @@ const Dashboard: React.FC = () => {
             </Box>
           </Box>
           <Box
-            gridColumn="span 4"
-            gridRow="span 2"
-            backgroundColor={colors.primary[400]}
-            overflow="auto"
+            sx={{
+              gridColumn: "span 4",
+              gridRow: "span 2",
+              backgroundColor: colors.primary[400],
+              overflow: "auto",
+            }}
           >
             <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              colors={colors.grey[100]}
-              p="15px"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                borderBottom: `4px solid ${colors.primary[500]}`,
+                color: colors.grey[100],
+                p: "15px",
+              }}
             >
               <Typography
                 color={colors.grey[100]}
@@ -295,9 +303,16 @@ const Dashboard: React.FC = () => {
                   <Box color={colors.grey[100]}>{transaction.createdAt}</Box>
                   <Box color={colors.grey[100]}>{transaction.type}</Box>
                   <Box
-                    backgroundColor={colors.greenAccent[500]}
-                    p="5px 10px"
-                    borderRadius="4px"
+                    // backgroundColor={colors.greenAccent[500]}
+                    // p="5px 10px"
+                    // borderRadius="4px"
+                    sx={{
+                      backgroundColor: colors.greenAccent[500],
+
+                      borderRadius: "4px",
+
+                      p: 5,
+                    }}
                   >
                     {formatAmount(transaction.amount)}
                   </Box>
@@ -329,11 +344,14 @@ const Dashboard: React.FC = () => {
             >
               {/* Active Loan Details Section */}
               <Box
-                flex={1}
-                backgroundColor={colors.primary[400]}
-                borderRadius="8px"
-                boxShadow={3}
-                p={2}
+                sx={{
+                  flex: 1,
+                  backgroundColor: colors.primary[400],
+
+                  borderRadius: "8px",
+                  boxShadow: 3,
+                  p: 2,
+                }}
               >
                 <Typography
                   color={colors.grey[100]}
@@ -443,8 +461,7 @@ const Dashboard: React.FC = () => {
                           name="email"
                           error={!!touched.email && !!errors.email}
                           helperText={touched.email && errors.email}
-                          sx={{ gridColumn: "span 4" }}
-                          mt="20px"
+                          sx={{ gridColumn: "span 4", mt: "20px" }}
                         />
                         <TextField
                           fullWidth
@@ -489,13 +506,15 @@ const Dashboard: React.FC = () => {
               </Box>
               {/* Loan History Section */}
               <Box
-                flex={1}
-                backgroundColor={colors.primary[400]}
-                overflow="auto"
-                borderRadius="8px"
-                boxShadow={3}
-                p={2}
-                mt={2}
+                sx={{
+                  flex: 1,
+                  backgroundColor: colors.primary[400],
+                  overflow: "auto",
+                  borderRadius: "8px",
+                  boxShadow: 3,
+                  p: 2,
+                  mt: 2,
+                }}
               >
                 <Typography
                   color={colors.grey[100]}

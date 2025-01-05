@@ -1,14 +1,29 @@
 import { Box, Button, TextField } from "@mui/material";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 
-const Form = () => {
+// Define the types for the form values
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  contact: string;
+  address1: string;
+  address2: string;
+}
+
+const Form: React.FC = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = (values) => {
+  // Define form submit handler with FormikHelpers type
+  const handleFormSubmit = (
+    values: FormValues,
+    actions: FormikHelpers<FormValues>
+  ) => {
     console.log(values);
+    actions.setSubmitting(false);
   };
 
   return (
@@ -131,6 +146,7 @@ const Form = () => {
 const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
+// Define the validation schema
 const checkoutSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
@@ -142,7 +158,9 @@ const checkoutSchema = yup.object().shape({
   address1: yup.string().required("required"),
   address2: yup.string().required("required"),
 });
-const initialValues = {
+
+// Initial values for the form
+const initialValues: FormValues = {
   firstName: "",
   lastName: "",
   email: "",

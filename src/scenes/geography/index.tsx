@@ -3,9 +3,10 @@ import GeographyChart from "../../components/GeographyChart";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
 
-const Geography = () => {
+const Geography: React.FC = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <Box m="20px">
       <Header title="Geography" subtitle="Simple Geography Chart" />

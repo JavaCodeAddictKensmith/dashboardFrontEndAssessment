@@ -3,7 +3,11 @@ import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
 import { mockBarData as data } from "../data/mockData";
 
-const BarChart = ({ isDashboard = false }) => {
+interface BarChartProps {
+  isDashboard?: boolean;
+}
+
+const BarChart: React.FC<BarChartProps> = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -11,7 +15,6 @@ const BarChart = ({ isDashboard = false }) => {
     <ResponsiveBar
       data={data}
       theme={{
-        // added
         axis: {
           domain: {
             line: {
@@ -68,7 +71,7 @@ const BarChart = ({ isDashboard = false }) => {
       ]}
       borderColor={{
         from: "color",
-        modifiers: [["darker", "1.6"]],
+        modifiers: [["darker", 1.6]],
       }}
       axisTop={null}
       axisRight={null}
@@ -76,7 +79,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "country", // changed
+        legend: isDashboard ? undefined : "country",
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -84,7 +87,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "food", // changed
+        legend: isDashboard ? undefined : "food",
         legendPosition: "middle",
         legendOffset: -40,
       }}
@@ -120,9 +123,9 @@ const BarChart = ({ isDashboard = false }) => {
         },
       ]}
       role="application"
-      barAriaLabel={function (e) {
-        return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
-      }}
+      barAriaLabel={(e) =>
+        `${e.id}: ${e.formattedValue} in country: ${e.indexValue}`
+      }
     />
   );
 };

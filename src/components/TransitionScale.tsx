@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+
 const opacityAnimation = {
   initial: {
     opacity: 0,
@@ -13,7 +14,13 @@ const opacityAnimation = {
     scale: 0,
   },
 };
-function TransitionScale({ children, className }) {
+
+interface TransitionScaleProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+function TransitionScale({ children, className }: TransitionScaleProps) {
   return (
     <motion.div
       className={className}
@@ -22,9 +29,9 @@ function TransitionScale({ children, className }) {
         duration: 0.6,
       }}
       variants={opacityAnimation}
-      initial='initial'
-      animate='animate'
-      exit='exit'
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
       {children}
     </motion.div>
