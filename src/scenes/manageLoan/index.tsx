@@ -63,8 +63,7 @@ const Team: React.FC = () => {
     actions.setSubmitting(false);
   };
 
-  const phoneRegExp =
-    /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
+  const phoneRegExp = /^(?!0+$)\d+$/;
 
   const checkoutSchema = yup.object().shape({
     firstName: yup.string().required("required"),
@@ -72,7 +71,7 @@ const Team: React.FC = () => {
     email: yup.string().required("required"),
     contact: yup
       .string()
-      .matches(phoneRegExp, "Phone number is not valid")
+      .matches(phoneRegExp, "Amount is not valid")
       .required("required"),
     address1: yup.string().required("required"),
     address2: yup.string().required("required"),

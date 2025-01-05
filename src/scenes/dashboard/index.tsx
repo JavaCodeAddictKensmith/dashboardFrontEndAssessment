@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { transactions, userAccounts, loanHistory, loanHisDetails } =
     useSelector((state: RootState) => state.transactions);
-  const formatAmount = (amount:any) => {
+  const formatAmount = (amount: any) => {
     if (!amount) return "0.00";
     const parsedAmount = parseFloat(amount);
     if (isNaN(parsedAmount)) return "0.00";
@@ -127,16 +127,15 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const phoneRegExp =
-    /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
+  const phoneRegExp = /^(?!0+$)\d+$/;
 
   const checkoutSchema = yup.object().shape({
     firstName: yup.string().required("required"),
     lastName: yup.string().required("required"),
-    email: yup.string().email("Invalid email").required("required"),
+    email: yup.string().required("required"),
     contact: yup
       .string()
-      .matches(phoneRegExp, "Phone number is not valid")
+      .matches(phoneRegExp, "amount is not valid")
       .required("required"),
     address1: yup.string().required("required"),
     address2: yup.string().required("required"),
