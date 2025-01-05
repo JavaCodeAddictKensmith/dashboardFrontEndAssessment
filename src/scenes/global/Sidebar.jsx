@@ -16,6 +16,12 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import {
+  MoneyRounded,
+  MoneyOutlined,
+  AttachMoney,
+  Receipt,
+} from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -133,26 +139,26 @@ const Sidebar = ({ name, role }) => {
               Data
             </Typography> */}
             <Item
-              title="Manage Team"
+              title="Manage Loan"
               to="/team"
-              icon={<PeopleOutlinedIcon />}
+              icon={<AttachMoney />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Contacts Information"
+              title="Transactions History"
               to="/contacts"
-              icon={<ContactsOutlinedIcon />}
+              icon={<Receipt />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Invoices Balances"
               to="/invoices"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
             <Typography
               variant="h6"

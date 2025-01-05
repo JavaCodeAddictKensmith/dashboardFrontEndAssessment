@@ -7,12 +7,8 @@ import {
   TextField,
 } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions, mockDataInvoices } from "../../data/mockData";
+
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 
 import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
@@ -33,6 +29,7 @@ import {
   fetchUserLoanHisDetails,
 } from "../../features/Transactions/transactionSlice";
 import { useEffect } from "react";
+import Loading from "../../components/Loading";
 
 interface FormValues {
   firstName: string;
