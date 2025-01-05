@@ -1,19 +1,10 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Typography,
-  useTheme,
-  TextField,
-} from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 
 import Transcale from "../../components/TransitionScale";
 import Header from "../../components/Header";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Formik, FormikHelpers } from "formik";
-import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
+
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../app/store";
 import {

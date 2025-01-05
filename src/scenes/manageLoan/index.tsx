@@ -6,24 +6,18 @@ import {
   TextField,
   useMediaQuery,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+
 import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import Header from "../../components/Header";
+
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../app/store";
 import {
-  fetchTransactions,
-  fetchUserAccountDetails,
   fetchUserLoanHistory,
   fetchUserLoanHisDetails,
 } from "../../features/Transactions/transactionSlice";
 import { Formik, FormikHelpers } from "formik";
 import { useEffect } from "react";
-import { yupToFormErrors } from "formik";
+
 import * as yup from "yup";
 interface FormValues {
   firstName: string;
@@ -40,8 +34,9 @@ const Team: React.FC = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const dispatch = useDispatch<AppDispatch>();
-  const { transactions, userAccounts, loanHistory, loanHisDetails } =
-    useSelector((state: RootState) => state.transactions);
+  const { loanHistory, loanHisDetails } = useSelector(
+    (state: RootState) => state.transactions
+  );
   const formatAmount = (amount) => {
     if (!amount) return "0.00";
     const parsedAmount = parseFloat(amount);
@@ -103,6 +98,8 @@ const Team: React.FC = () => {
         // justifyContent="space-between"
         // alignItems="flex-start"
         gap={3}
+        px={3}
+        pb={3}
       >
         {/* Active Loan Details Section */}
         <Box
@@ -142,10 +139,10 @@ const Team: React.FC = () => {
               {/* Render active loan details dynamically */}
               {loanHisDetails?.data ? (
                 <>
-                  <strong>Loan Amount:</strong> $
-                  {loanHisDetails?.data[0]?.amount} <br />
-                  <strong>Interest Rate:</strong>{" "}
-                  {loanHisDetails?.data[0]?.interest} <br />
+                  <strong>Loan Amount:</strong>$
+                  {formatAmount(loanHisDetails?.data[0]?.amount)} <br />
+                  <strong>Loan Interest:</strong>{" "}
+                  {formatAmount(loanHisDetails?.data[0]?.interest)} <br />
                   <strong>Tenure:</strong>
                   {loanHisDetails?.data[0]?.duration} months
                   <br />
@@ -209,32 +206,6 @@ const Team: React.FC = () => {
                     },
                   }}
                 >
-                  {/* <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="First Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Last Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name="lastName"
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
-                sx={{ gridColumn: "span 2" }}
-              /> */}
                   <TextField
                     fullWidth
                     variant="filled"
