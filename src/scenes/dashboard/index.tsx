@@ -194,7 +194,7 @@ const Dashboard: React.FC = () => {
               <h2> {userAccounts?.data[0]?.name}</h2>
             </Transcale>
             <StatBox
-              title={`${userAccounts?.data[0]?.AccountBalance}`}
+              title={`${formatAmount(userAccounts?.data[0]?.AccountBalance)}`}
               subtitle="Account Balance"
               progress="0.80"
               increase="+43%"
@@ -232,7 +232,7 @@ const Dashboard: React.FC = () => {
                   fontWeight="bold"
                   color={colors.greenAccent[500]}
                 >
-                  ${userAccounts?.data[0]?.revenue}
+                  ${formatAmount(userAccounts?.data[0]?.revenue)}
                 </Typography>
               </Box>
               <Box>
@@ -310,7 +310,7 @@ const Dashboard: React.FC = () => {
 
           {/* new section */}
 
-          <Box mb="30px">
+          <Box mb="30px" mt={5}>
             <Typography
               variant="h2"
               color={colors.grey[100]}
@@ -319,105 +319,14 @@ const Dashboard: React.FC = () => {
             >
               Loan Management
             </Typography>
-
             <Box
-              display="flex"
-              flexDirection={{ xs: "column", md: "row" }}
-              justifyContent="space-between"
-              alignItems="flex-start"
+              // display="flex"
+              // flexDirection={{ xs: "column", md: "row" }}
+              // justifyContent="space-between"
+              // alignItems="flex-start"
               gap={3}
+              pb={3}
             >
-              {/* Loan History Section */}
-              <Box
-                flex={1}
-                backgroundColor={colors.primary[400]}
-                overflow="auto"
-                borderRadius="8px"
-                boxShadow={3}
-                p={2}
-              >
-                <Typography
-                  color={colors.grey[100]}
-                  variant="h5"
-                  fontWeight="600"
-                  mb={2}
-                  borderBottom={`4px solid ${colors.primary[500]}`}
-                  pb={1}
-                >
-                  Loan History
-                </Typography>
-
-                {loanHistory?.data?.map((transaction, i) => (
-                  <Box
-                    key={`${transaction.id}-${i}`}
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    borderBottom={`2px solid ${colors.primary[500]}`}
-                    p={2}
-                  >
-                    {/*
-                      {
-        "transactionDate": "23-10-2024",
-        "dueDate": "12-12-2024",
-        "interest": "1000000",
-        "duration": "6",
-        "status": "Paid",
-        "issuer": "Sterling",
-        "amount": "1000000",
-        "purpose": "Purchase",
-        "id": "1"
-    },
-                    
-                    */}
-                    <Box>
-                      <Typography
-                        color={colors.greenAccent[500]}
-                        variant="h6"
-                        fontWeight="600"
-                      >
-                        {transaction.transactionDate}
-                      </Typography>
-                      <Typography color={colors.grey[100]}>
-                        {transaction.dueDate}
-                      </Typography>
-                    </Box>
-                    <Box color={colors.grey[100]}>
-                      {transaction.duration} months
-                    </Box>
-                    <Box
-                      // backgroundColor={colors.greenAccent[500]}
-                      p="5px 10px"
-                      borderRadius="4px"
-                      // color={colors.grey[100]}
-                    >
-                      {transaction.issuer}
-                    </Box>
-                    <Box
-                      p="5px 10px"
-                      borderRadius="4px"
-                      // color={colors.grey[100]}
-                    >
-                      {transaction.amount}
-                    </Box>
-                    <Box
-                      p="5px 10px"
-                      borderRadius="4px"
-                      // color={colors.grey[100]}
-                    >
-                      {transaction.interest}
-                    </Box>
-                    <Box
-                      p="5px 10px"
-                      borderRadius="4px"
-                      // color={colors.grey[100]}
-                    >
-                      {transaction.status}
-                    </Box>
-                  </Box>
-                ))}
-              </Box>
-
               {/* Active Loan Details Section */}
               <Box
                 flex={1}
@@ -456,10 +365,10 @@ const Dashboard: React.FC = () => {
                     {/* Render active loan details dynamically */}
                     {loanHisDetails?.data ? (
                       <>
-                        <strong>Loan Amount:</strong> $
-                        {loanHisDetails?.data[0]?.amount} <br />
-                        <strong>Interest Rate:</strong>{" "}
-                        {loanHisDetails?.data[0]?.interest} <br />
+                        <strong>Loan Amount:</strong>$
+                        {formatAmount(loanHisDetails?.data[0]?.amount)} <br />
+                        <strong>Loan Interest:</strong>{" "}
+                        {formatAmount(loanHisDetails?.data[0]?.interest)} <br />
                         <strong>Tenure:</strong>
                         {loanHisDetails?.data[0]?.duration} months
                         <br />
@@ -523,32 +432,6 @@ const Dashboard: React.FC = () => {
                           },
                         }}
                       >
-                        {/* <TextField
-                        fullWidth
-                        variant="filled"
-                        type="text"
-                        label="First Name"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.firstName}
-                        name="firstName"
-                        error={!!touched.firstName && !!errors.firstName}
-                        helperText={touched.firstName && errors.firstName}
-                        sx={{ gridColumn: "span 2" }}
-                      />
-                      <TextField
-                        fullWidth
-                        variant="filled"
-                        type="text"
-                        label="Last Name"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.lastName}
-                        name="lastName"
-                        error={!!touched.lastName && !!errors.lastName}
-                        helperText={touched.lastName && errors.lastName}
-                        sx={{ gridColumn: "span 2" }}
-                      /> */}
                         <TextField
                           fullWidth
                           variant="filled"
@@ -604,10 +487,115 @@ const Dashboard: React.FC = () => {
                   )}
                 </Formik>
               </Box>
+              {/* Loan History Section */}
+              <Box
+                flex={1}
+                backgroundColor={colors.primary[400]}
+                overflow="auto"
+                borderRadius="8px"
+                boxShadow={3}
+                p={2}
+                mt={2}
+              >
+                <Typography
+                  color={colors.grey[100]}
+                  variant="h5"
+                  fontWeight="600"
+                  mb={2}
+                  borderBottom={`4px solid ${colors.primary[500]}`}
+                  pb={1}
+                >
+                  Loan History
+                </Typography>
+
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  borderBottom={`2px solid ${colors.primary[500]}`}
+                  p={2}
+                >
+                  {" "}
+                  <Box color={colors.grey[100]}> Period</Box>
+                  <Box color={colors.grey[100]}>Duration</Box>
+                  <Box color={colors.grey[100]}> Issuer</Box>
+                  <Box color={colors.grey[100]}> Amount</Box>
+                  <Box color={colors.grey[100]}> Interest</Box>
+                  <Box color={colors.grey[100]}> Status</Box>
+                </Box>
+
+                {loanHistory?.data?.map((transaction, i) => (
+                  <Box
+                    key={`${transaction.id}-${i}`}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    borderBottom={`2px solid ${colors.primary[500]}`}
+                    p={2}
+                  >
+                    {/*
+                        {
+          "transactionDate": "23-10-2024",
+          "dueDate": "12-12-2024",
+          "interest": "1000000",
+          "duration": "6",
+          "status": "Paid",
+          "issuer": "Sterling",
+          "amount": "1000000",
+          "purpose": "Purchase",
+          "id": "1"
+          },
+                      
+                      */}
+                    <Box>
+                      <Typography
+                        color={colors.greenAccent[500]}
+                        variant="h6"
+                        fontWeight="600"
+                      >
+                        {transaction.transactionDate}
+                      </Typography>
+                      <Typography color={colors.grey[100]}>
+                        {transaction.dueDate}
+                      </Typography>
+                    </Box>
+                    <Box color={colors.grey[100]}>
+                      {transaction.duration} months
+                    </Box>
+                    <Box
+                      // backgroundColor={colors.greenAccent[500]}
+                      p="5px 10px"
+                      borderRadius="4px"
+                      // color={colors.grey[100]}
+                    >
+                      {transaction.issuer}
+                    </Box>
+                    <Box
+                      p="5px 10px"
+                      borderRadius="4px"
+                      // color={colors.grey[100]}
+                    >
+                      {transaction.amount}
+                    </Box>
+                    <Box
+                      p="5px 10px"
+                      borderRadius="4px"
+                      // color={colors.grey[100]}
+                    >
+                      {transaction.interest}
+                    </Box>
+                    <Box
+                      p="5px 10px"
+                      borderRadius="4px"
+                      // color={colors.grey[100]}
+                    >
+                      {transaction.status}
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
             </Box>
           </Box>
-
-          {/* Loansection commented out */}
 
           <Box m="20px">
             <Header

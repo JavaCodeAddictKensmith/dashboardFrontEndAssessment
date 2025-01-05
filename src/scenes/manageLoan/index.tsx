@@ -278,6 +278,22 @@ const Team: React.FC = () => {
             Loan History
           </Typography>
 
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            borderBottom={`2px solid ${colors.primary[500]}`}
+            p={2}
+          >
+            {" "}
+            <Box color={colors.grey[100]}> Period</Box>
+            <Box color={colors.grey[100]}>Duration</Box>
+            <Box color={colors.grey[100]}> Issuer</Box>
+            <Box color={colors.grey[100]}> Amount</Box>
+            <Box color={colors.grey[100]}> Interest</Box>
+            <Box color={colors.grey[100]}> Status</Box>
+          </Box>
+
           {loanHistory?.data?.map((transaction, i) => (
             <Box
               key={`${transaction.id}-${i}`}
